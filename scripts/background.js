@@ -13,9 +13,11 @@ function stop(){
                 19: "./images/camera16.png",
                 38: "./images/camera16.png"
             }
-        
-        });
+      
+        });  
+
          on = false;
+          chrome.tabs.executeScript(null, {code:"document.querySelector('.videoElement').style.display = 'none'"})
          stop()
     } else {
         chrome.browserAction.setIcon({
@@ -24,9 +26,11 @@ function stop(){
                 19: "./images/camera-on.png",
                 38: "./images/camera-on.png"
             }
-        });
-
+        }); 
+        
+        
         chrome.tabs.executeScript(null, {file:"./scripts/camera.js"})
+        chrome.tabs.executeScript(null, {file:"./scripts/start.js"})
         on = true;
     }
 })

@@ -13,10 +13,11 @@
 function save_options() {
   const shapes = document.getElementById('shape').value;
   const positions = document.getElementById('position').value;
-  const mirror = document.getElementById('mirror').value;
+  const mirror = document.getElementById('mirror').checked;
   chrome.storage.sync.set({
   position: positions,
-  shape:shapes
+  shape:shapes,
+  mirrors:mirror
 });
 }
 

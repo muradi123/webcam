@@ -6,8 +6,13 @@
   .videoElement {
     right: 30px;
     top: 70px;
-    width: 250px;
-    height: 190px;
+    width: 220px;
+    height: auto;
    
    }
 
+
+  .left-bottom{
+    top: 80vh;
+    left: 5vw;
+  }
