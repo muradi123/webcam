@@ -27,6 +27,7 @@
 
     "content_scripts": [
         {
+          "run_at":"document_end",
           "matches": ["<all_urls>"],
           "js": ["./scripts/jquery.js", "./scripts/content.js"],
            "css":["./styles/content.css"]

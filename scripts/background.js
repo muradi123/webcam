@@ -1,49 +1,40 @@
-
-
-let active = null;
+let isEnabled = true;
 let on = false;
 
-function reload (newMode) {
-}
-function start (tabId) {
-  chrome.tabs.executeScript(tabId, { file: "./scripts/camera.js" });
-
-  chrome.tabs.executeScript(tabId, { code: 'document.querySelector("#videoElement").style.display ="block"' });
-  on = true;
-  reload();
-}
-function stop (tabId) {
-  chrome.tabs.executeScript(tabId, {
-   code: 'document.querySelector("#videoElement").style.display ="none"'
-});
-  on = false;
-  reload();
-}
-chrome.browserAction.onClicked.addListener(function (tab) {
-  let url = tab.url;
-   secure = url.match(/^https:\/\//i);
-  if (on) {
-    if (active) {
-      stop(active);
-    }
-  } else {
-    if (secure) {
-      active = tab.id;
-      start(active);
-    }
+function stop(){
+  chrome.tabs.executeScript(null, {file:"./scripts/off.js"})
   }
-});
+
+  chrome.browserAction.onClicked.addListener(function() {
+    isEnabled = !isEnabled
+    if (isEnabled) {
+        chrome.browserAction.setIcon({
+            path: {
+                19: "./images/camera16.png",
+                38: "./images/camera16.png"
+            }
+        
+        });
+         on = false;
+         stop()
+    } else {
+        chrome.browserAction.setIcon({
+            path: {
+                
+                19: "./images/camera-on.png",
+                38: "./images/camera-on.png"
+            }
+        });
+
+        chrome.tabs.executeScript(null, {file:"./scripts/camera.js"})
+        on = true;
+    }
+})
 
 function updateTab (tabId) {
-  chrome.tabs.get(tabId, function (tab) {
-    let url = tab.url;
-    let secure = url.match(/^https:\/\//i);
-    if (on && active && secure) {
-     stop(active);
-      active = tabId;
-      start(active);
-    }
-  });
+ if (on === true) {
+  chrome.tabs.executeScript(null, {file:"./scripts/camera.js"})
+ }
 }
 
 chrome.tabs.onUpdated.addListener(function (tabId) {

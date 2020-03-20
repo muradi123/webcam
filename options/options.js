@@ -1,17 +1,19 @@
 
 
   const saveButton = document.getElementById('save');
-  saveButton.addEventListener('click', function(){
-    saveButton.innerHTML = 'saved';
+    saveButton.addEventListener('click', function(){
+    let saved = document.getElementById('saved');
+    saved.innerHTML = 'options saved';
     setTimeout(() => {
-      saveButton.innerHTML = 'save';
+      saved.innerHTML = '';
     }, 750);
   })
 
 
 function save_options() {
-  const shapes = document.getElementById('shapes').value;
-  const positions = document.getElementById('positions').value;
+  const shapes = document.getElementById('shape').value;
+  const positions = document.getElementById('position').value;
+  const mirror = document.getElementById('mirror').value;
   chrome.storage.sync.set({
   position: positions,
   shape:shapes
